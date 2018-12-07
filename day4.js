@@ -1187,7 +1187,7 @@ for(i = 0; i < records.length; i++) {
     ) {
         var timeAsleep = records[i].date.getMinutes();
         var durationSleep = records[i + 1].date.getMinutes() - records[i].date.getMinutes();
-        console.log(timeAsleep, durationSleep);
+        // console.log(timeAsleep, durationSleep);
 
         if(guards[records[i].guard] == undefined) {
             guards[records[i].guard] = {"sleep":[]};
@@ -1221,15 +1221,30 @@ for(guard in guards) {
 
 for(guard in guards) {
     guards[guard].total = guards[guard].sleep.reduce(add, 0);
-    console.log(guard,guards[guard].total);
+    // console.log(guard,guards[guard].total);
 }
 
-console.log(guards['2663']);
+// console.log(guards['2663']);
 
 /* Solution */
 // Highest total in output list: Guard 2663
 // Highest minute in 2663: minute 45 for 15 minutes
 // 45 * 2663 = 119835
+
+var highestMinute = 1;
+var guardOfMinute = 0;
+// console.log(guards['2663']);
+
+for(g in guards) {
+    guards[g].sleep.forEach((min,idx)=>{
+        if(min > highestMinute){
+            highestMinute = idx;
+            guardOfMinute = g;
+        }
+    }) 
+}
+
+console.log("Guard ID: " +  guardOfMinute, "Minute most often slept " + highestMinute);
 
 
 
